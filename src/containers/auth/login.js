@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
+import { handleLoginApi } from "../../services/userService";
 
 import * as actions from "../../store/actions";
 
@@ -28,8 +29,12 @@ class Login extends Component {
     });
   };
 
-  handleLogin = () => {
-    console.log(this.state);
+  handleLogin = async () => {
+    try {
+      await handleLoginApi(this.state.username, this.state.password);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   handleShowHidePassword = () => {
